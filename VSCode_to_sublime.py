@@ -1,4 +1,5 @@
 import json
+import os
 
 
 
@@ -7,7 +8,7 @@ with open(filename, encoding='utf-8') as f_obj:
 	vs_code_snippets = json.load(f_obj)
 
 xx = list(vs_code_snippets.keys())
-c = '%s.sublime-snippet' % (vs_code_snippets[xx[0]]['prefix'])
+c = 'snippets/%s.sublime-snippet' % (vs_code_snippets[xx[0]]['prefix'])
 b = '''
 <snippet>
 	<content><![CDATA[
@@ -21,6 +22,8 @@ b = '''
 	vs_code_snippets[xx[0]]['prefix'],
 	vs_code_snippets[xx[0]]['description']
 )
+if not os.path.exists('snippets'):
+	os.makedirs('quasar_snippets')
 with open(c, 'w') as w_obj:
 	w_obj.write(b.strip())
 
